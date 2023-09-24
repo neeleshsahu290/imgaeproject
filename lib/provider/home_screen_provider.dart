@@ -2,7 +2,6 @@
 
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
-import 'package:edlerd_project/repository/base_repository.dart';
 import 'package:edlerd_project/screens/upload_picture/ui/upload_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -11,15 +10,15 @@ import 'package:image_picker/image_picker.dart';
 class HomeScreenProvider extends ChangeNotifier {
   CroppedFile? _image;
   late BuildContext ctx;
-  final Repository _repository = Repository();
+  //final Repository _repository = Repository();
 
   init(BuildContext context) {
     ctx = context;
   }
 
   selectImage({bool isCamera = false}) async {
-    final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(
         source: isCamera ? ImageSource.camera : ImageSource.gallery);
     if (image != null) {
       CroppedFile? croppedFile = await ImageCropper().cropImage(

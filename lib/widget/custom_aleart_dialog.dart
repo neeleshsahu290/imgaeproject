@@ -1,5 +1,4 @@
 import 'package:edlerd_project/constants/app_color.dart';
-import 'package:edlerd_project/constants/assets.dart';
 import 'package:edlerd_project/widget/custom_container.dart';
 import 'package:edlerd_project/widget/my_text.dart';
 import 'package:edlerd_project/widget/primary_button.dart';

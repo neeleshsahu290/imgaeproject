@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomProgressIndicator extends StatelessWidget {
   final double? size;
   double? value;
-  CustomProgressIndicator({this.size, this.value});
+  CustomProgressIndicator({super.key, this.size, this.value});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,7 +13,7 @@ class CustomProgressIndicator extends StatelessWidget {
       child: CircularProgressIndicator(
           strokeWidth: 6.0,
           value: value,
-          color: Color.fromARGB(255, 241, 123, 123),
+          color: const Color.fromARGB(255, 241, 123, 123),
           backgroundColor: Colors.grey.shade300),
     );
   }

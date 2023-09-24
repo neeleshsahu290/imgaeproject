@@ -1,4 +1,3 @@
-import 'package:edlerd_project/screens/home/ui/home_screen.dart';
 import 'package:edlerd_project/widget/bottom_modal_sheet.dart';
 import 'package:edlerd_project/widget/custom_container.dart';
 import 'package:edlerd_project/widget/my_text.dart';

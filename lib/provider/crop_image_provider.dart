@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:edlerd_project/constants/constant.dart';
@@ -33,8 +32,8 @@ class CropImageProvider extends ChangeNotifier {
   }
 
   Future<void> galleryImages({required bool isCamera}) async {
-    final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(
         source: isCamera ? ImageSource.camera : ImageSource.gallery);
     imageData = await image!.readAsBytes(); // Converts the file to UInt8List
 

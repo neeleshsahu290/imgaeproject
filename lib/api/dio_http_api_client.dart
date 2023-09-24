@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:edlerd_project/constants/constant.dart';
 import 'package:flutter/foundation.dart';
 
 import 'api_constant.dart';

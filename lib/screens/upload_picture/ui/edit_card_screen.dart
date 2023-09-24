@@ -58,7 +58,7 @@ class _EditCardState extends State<EditCard> {
                           height: 75.h,
                           url: imgUrl,
                           fallBackText: "fallBackText"),
-                      DummyDate()
+                      const DummyDate()
                     ],
                   ),
                   Positioned(

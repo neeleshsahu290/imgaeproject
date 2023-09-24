@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/screens/home/ui/home_screen.dart';
-import 'package:edlerd_project/screens/upload_picture/ui/crop_img_screen.dart';
 import 'package:edlerd_project/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,7 @@ Future<void> main() async {
     statusBarBrightness: Brightness.dark, // For iOS (dark icons)
   ));
 
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

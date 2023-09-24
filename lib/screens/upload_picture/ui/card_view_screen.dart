@@ -65,7 +65,7 @@ class _EditCardState extends ConsumerState<CardViewScreen> {
                               url: imgUrl,
                               fallBackText: "fallBackText"),
                         ),
-                        DummyDate()
+                        const DummyDate()
                       ],
                     ),
                     const SizedBox(
