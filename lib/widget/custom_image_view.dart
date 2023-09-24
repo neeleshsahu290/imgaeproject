@@ -1,10 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:edlerd_project/constants/app_color.dart';
-import 'package:edlerd_project/constants/assets.dart';
-import 'package:edlerd_project/constants/constant.dart';
 import 'package:edlerd_project/widget/custom_progress_indiactor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'my_text.dart';
 

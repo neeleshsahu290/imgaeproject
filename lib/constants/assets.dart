@@ -8,3 +8,4 @@ const String personIcon = "assets/icons/ic_person.svg";
 const String magicUpIcon = "assets/icons/ic_magic_up.svg";
 const String magicDownIcon = "assets/icons/ic_magic_down.svg";
 const String errorIcon = "assets/icons/ic_error.svg";
+const String profileImg = "assets/images/profile.png";

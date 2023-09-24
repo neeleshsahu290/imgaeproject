@@ -2,6 +2,7 @@ import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
 import 'package:edlerd_project/provider/edit_card_provider.dart';
 import 'package:edlerd_project/screens/upload_picture/model/edit_card_image_data/edit_card_image_data.dart';
+import 'package:edlerd_project/screens/upload_picture/ui/widgets/dumy_card_data.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
 import 'package:edlerd_project/widget/custom_image_view.dart';
 import 'package:edlerd_project/widget/custom_progress_indiactor.dart';
@@ -50,21 +51,23 @@ class _EditCardState extends ConsumerState<CardView> {
       ),
       body: ref.watch(editCardProvider).imageData.when(
             data: ((data) {
-              EditCardImageData mData = data;
-              String imgUrl = mData.result![0].customImageCardDesignInfo
-                      ?.profileBannerImageUrl ??
-                  "";
+              var imgUrl = ref.watch(editCardProvider).imgUrl ?? "";
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CustomImageView(
-                          width: double.infinity,
-                          cornerRadius: 20.0,
-                          height: 75.h,
-                          url: imgUrl,
-                          fallBackText: "fallBackText"),
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: CustomImageView(
+                              width: double.infinity,
+                              cornerRadius: 20.0,
+                              height: 75.h,
+                              url: imgUrl,
+                              fallBackText: "fallBackText"),
+                        ),
+                        DummyDate()
+                      ],
                     ),
                     const SizedBox(
                       height: 10.0,
@@ -77,12 +80,16 @@ class _EditCardState extends ConsumerState<CardView> {
                       borderColor: colorPrimary,
                       hasBorder: true,
                       //   width: 2.0,
-                      onPressed: () {
-                        navigatorPush(
+                      onPressed: () async {
+                        var value = await navigatorPush(
                             context,
                             EditCard(
                               imgUrl: imgUrl,
                             ));
+
+                        if (value != null) {
+                          ref.read(editCardProvider).setImgUrl(value);
+                        }
                       },
                       textColor: colorPrimary,
                       btnText: 'Edit Card',
@@ -97,7 +104,7 @@ class _EditCardState extends ConsumerState<CardView> {
                     getImgData(isRefreshing: true);
                   },
                 )),
-            loading: () => CustomProgressIndicator(),
+            loading: () => SizedBox(height: double.infinity,width: double.infinity,child: Center(child: CustomProgressIndicator())),
           ),
     );
   }
