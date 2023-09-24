@@ -3,6 +3,7 @@ import 'package:edlerd_project/constants/assets.dart';
 import 'package:edlerd_project/provider/home_screen_provider.dart';
 import 'package:edlerd_project/screens/home/widget/image_select_sheet.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
+import 'package:edlerd_project/widget/custom_container.dart';
 import 'package:edlerd_project/widget/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,45 +47,43 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: GestureDetector(
-              onTap: () async {
+            child: CustomContainer(
+              onClick: () async {
                 var value = await imageSelectSheet(context);
 
                 if (value != null) {
-                 
-
                   ref.read(homeScrenProvider).selectImage(isCamera: value);
                   // }
                 }
               },
-              child: PhysicalModel(
-                borderRadius: BorderRadius.circular(16.0),
-                color: const Color(0xFFBBDEFB),
-                //elevation: 1.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 30.0),
-                      child: SvgPicture.asset(magicUpIcon),
+              horizontalPadding: 0.0,
+              verticalPadding: 5.0,
+              radius: 16.0,
+              color: const Color(0xFFBBDEFB),
+              //elevation: 1.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 30.0),
+                    child: SvgPicture.asset(magicUpIcon),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: MyText(
+                      text: "Upload Picture",
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blue.shade600,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: MyText(
-                        text: "Upload Picture",
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue.shade600,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30.0, bottom: 8.0),
-                      child: SvgPicture.asset(magicUpIcon),
-                    ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0, bottom: 8.0),
+                    child: SvgPicture.asset(magicUpIcon),
+                  ),
+                ],
               ),
             ),
           )

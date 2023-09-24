@@ -1,9 +1,6 @@
 import 'dart:io';
-import 'dart:ui';
-
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
-import 'package:edlerd_project/provider/home_screen_provider.dart';
 import 'package:edlerd_project/provider/upload_image_provider.dart';
 import 'package:edlerd_project/screens/upload_picture/ui/card_view.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
@@ -79,7 +76,7 @@ class UploadPicure extends StatelessWidget {
                       Navigator.pop(context);
                       if (status == true) {
                         // ignore: use_build_context_synchronously
-                        navigatorPush(context, const CardView());
+                        navigatorPushReplaceUntil(context, const CardView());
                       }
                     },
                     btnText: 'Save & Continue',

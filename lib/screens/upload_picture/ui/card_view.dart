@@ -1,7 +1,6 @@
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
 import 'package:edlerd_project/provider/edit_card_provider.dart';
-import 'package:edlerd_project/screens/upload_picture/model/edit_card_image_data/edit_card_image_data.dart';
 import 'package:edlerd_project/screens/upload_picture/ui/widgets/dumy_card_data.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
 import 'package:edlerd_project/widget/custom_image_view.dart';

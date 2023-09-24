@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:crop_your_image/crop_your_image.dart';
 import 'package:edlerd_project/constants/constant.dart';
 import 'package:edlerd_project/repository/base_repository.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class CropImageProvider extends ChangeNotifier {
   // ignore: unused_field
   String statusText = '';
   var isCropping = false;
-    var isCroped = false;
+  var isCroped = false;
 
   Uint8List? croppedData;
 
@@ -24,6 +25,10 @@ class CropImageProvider extends ChangeNotifier {
         .asUint8List();
 
     loadingImage = false;
+    notifyListeners();
+  }
+
+  changeState(CropStatus status) {
     notifyListeners();
   }
 
@@ -50,17 +55,16 @@ class CropImageProvider extends ChangeNotifier {
   final Repository _repository = Repository();
 
   uploadImageData({required var file}) async {
-
     final response = await _repository.uploadPic(fileList: file);
     if (response['status'] == success) {
-       imgUrl = (response['data']);
-        isCroped = true;
-
+      imgUrl = (response['data']);
+      isCroped = true;
+      notifyListeners();
       return true;
     } else {
+      notifyListeners();
       return false;
       // _imageData = AsyncValue.error(response['error'], StackTrace.current);
     }
-
   }
 }

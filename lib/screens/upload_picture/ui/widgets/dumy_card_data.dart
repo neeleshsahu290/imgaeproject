@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DummyDate extends StatelessWidget {
+  const DummyDate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -25,18 +27,18 @@ class DummyDate extends StatelessWidget {
             borderColor: white,
             child: Image.asset(profileImg),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15.0,
           ),
           MyText(text: "Alexendria", fontSize: 20.sp),
-          SizedBox(
+          const SizedBox(
             height: 15.0,
           ),
           MyText(
             text: "Panner bvalley",
             fontSize: 15.sp,
           ),
-          SizedBox(
+          const SizedBox(
             height: 15.0,
           )
         ],
