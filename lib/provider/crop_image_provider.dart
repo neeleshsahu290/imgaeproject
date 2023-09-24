@@ -38,19 +38,9 @@ class CropImageProvider extends ChangeNotifier {
         source: isCamera ? ImageSource.camera : ImageSource.gallery);
     imageData = await image!.readAsBytes(); // Converts the file to UInt8List
 
-    // imageData = (await NetworkAssetBundle(Uri.parse(imgUrl)).load(imgUrl))
-    //     .buffer
-    //     .asUint8List();
-
     loadingImage = false;
     notifyListeners();
   }
-  // Future<Uint8List> _load(String assetName) async {
-  //   // final assetData = await rootBundle.load(assetName);
-  //   // return assetData.buffer.asUint8List();
-
-  //   return
-  // }
 
   final Repository _repository = Repository();
 
@@ -64,7 +54,6 @@ class CropImageProvider extends ChangeNotifier {
     } else {
       notifyListeners();
       return false;
-      // _imageData = AsyncValue.error(response['error'], StackTrace.current);
     }
   }
 }

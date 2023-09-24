@@ -1,7 +1,7 @@
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
 import 'package:edlerd_project/provider/edit_card_provider.dart';
-import 'package:edlerd_project/screens/upload_picture/ui/widgets/dumy_card_data.dart';
+import 'package:edlerd_project/screens/upload_picture/widgets/dumy_card_data.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
 import 'package:edlerd_project/widget/custom_image_view.dart';
 import 'package:edlerd_project/widget/custom_progress_indiactor.dart';
@@ -11,21 +11,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'edit_card.dart';
+import 'edit_card_screen.dart';
 
 final editCardProvider =
     ChangeNotifierProvider.autoDispose<EditCardProvider>((ref) {
   return EditCardProvider();
 });
 
-class CardView extends ConsumerStatefulWidget {
-  const CardView({super.key});
+class CardViewScreen extends ConsumerStatefulWidget {
+  const CardViewScreen({super.key});
 
   @override
-  ConsumerState<CardView> createState() => _EditCardState();
+  ConsumerState<CardViewScreen> createState() => _EditCardState();
 }
 
-class _EditCardState extends ConsumerState<CardView> {
+class _EditCardState extends ConsumerState<CardViewScreen> {
   @override
   void initState() {
     super.initState();
@@ -103,7 +103,10 @@ class _EditCardState extends ConsumerState<CardView> {
                     getImgData(isRefreshing: true);
                   },
                 )),
-            loading: () => SizedBox(height: double.infinity,width: double.infinity,child: Center(child: CustomProgressIndicator())),
+            loading: () => SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: Center(child: CustomProgressIndicator())),
           ),
     );
   }

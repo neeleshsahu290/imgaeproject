@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:edlerd_project/constants/app_color.dart';
-import 'package:edlerd_project/constants/constant.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
 import 'package:edlerd_project/repository/base_repository.dart';
 import 'package:edlerd_project/screens/upload_picture/ui/upload_picture.dart';
@@ -12,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 class HomeScreenProvider extends ChangeNotifier {
   CroppedFile? _image;
   late BuildContext ctx;
-    final Repository _repository = Repository();
+  final Repository _repository = Repository();
 
   init(BuildContext context) {
     ctx = context;
@@ -46,37 +45,13 @@ class HomeScreenProvider extends ChangeNotifier {
         ],
       );
       _image = croppedFile;
- if (croppedFile != null) {
+      if (croppedFile != null) {
         navigatorPush(
             ctx,
             UploadPicure(
               file: _image!,
             ));
-    }
-      
+      }
     }
   }
-  // uploadImageData() async {
-  //   // if (isRefreshing) {
-  //   //   _imageData = const AsyncValue.loading();
-  //   //   notifyListeners();
-  //   // }
-  //   final response = await _repository.uploadPic(fileList: _image
-  //       );
-  //   if (response['status'] == success) {
-
-  //    //// if (croppedFile != null) {
-  //       navigatorPush(
-  //           ctx,
-  //           UploadPicure(
-  //             path: _image.path,
-  //           ));
-  //   //  }
-  //     ////_imageData = AsyncValue.data(response['data']);
-  //   } else {
-  //    // _imageData = AsyncValue.error(response['error'], StackTrace.current);
-  //   }
-  //   notifyListeners();
-  // }
-
 }

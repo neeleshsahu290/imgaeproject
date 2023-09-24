@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -5,7 +7,7 @@ import 'package:edlerd_project/api/api_constant.dart';
 import 'package:edlerd_project/api/http_api_client.dart';
 import 'package:edlerd_project/screens/upload_picture/model/edit_card_image_data/edit_card_image_data.dart';
 import 'package:edlerd_project/util/utils.dart';
- import 'package:http_parser/http_parser.dart';
+import 'package:http_parser/http_parser.dart';
 
 import '../constants/constant.dart';
 
@@ -55,17 +57,10 @@ class ImageRepository {
   }
 
   Future<Map<String, dynamic>> uploadPic({required var fileList}) async {
-  
+    String fileName = fileList.path.split('/').last;
 
- //   log(fileList.path.toString());
-     String fileName = fileList.path.split('/').last;
-
-    MultipartFile file = await MultipartFile.fromFile(
-      fileList.path,  filename: fileName,
-
-           contentType:  MediaType("image", "jpg")
-    );
-    log(file.filename.toString());
+    MultipartFile file = await MultipartFile.fromFile(fileList.path,
+        filename: fileName, contentType: MediaType("image", "jpg"));
 
     var formData = FormData.fromMap({"profileBannerImageURL": file});
 
@@ -81,7 +76,10 @@ class ImageRepository {
       if (response is Response) {
         if (isSuccess(response.statusCode!)) {
           if (response.data != null) {
-            return {'status': success, 'data': response.data['result'][0]['profileBannerImageURL']};
+            return {
+              'status': success,
+              'data': response.data['result'][0]['profileBannerImageURL']
+            };
           } else {
             return {'status': error, 'error': failureMessage};
           }

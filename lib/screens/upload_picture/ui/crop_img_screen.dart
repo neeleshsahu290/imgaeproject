@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
 
 import 'dart:developer';
 import 'dart:io';
@@ -18,7 +18,6 @@ import 'package:flutter/material.dart';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 
 final cropImgProvider =
@@ -26,35 +25,17 @@ final cropImgProvider =
   return CropImageProvider();
 });
 
-// class CropSampleMain extends StatelessWidget {
-//   String imgUrl;
-//   CropSampleMain({super.key, required this.imgUrl});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: CustomAppBar(
-//         isTitleCenter: false,
-//         title: "Custom Image Card",
-//         onBackPressed: () {
-//           Navigator.pop(context);
-//         },
-//       ),
-//       body: CropSample(imgUrl: imgUrl),
-//     );
-//   }
-// }
-
-class CropSample extends ConsumerStatefulWidget {
+// ignore: must_be_immutable
+class CropImageScreen extends ConsumerStatefulWidget {
   String imgUrl;
 
-  CropSample({super.key, required this.imgUrl});
+  CropImageScreen({super.key, required this.imgUrl});
 
   @override
-  _CropSampleState createState() => _CropSampleState();
+  _CropImageState createState() => _CropImageState();
 }
 
-class _CropSampleState extends ConsumerState<CropSample> {
+class _CropImageState extends ConsumerState<CropImageScreen> {
   final _cropController = CropController();
 
   @override
@@ -107,46 +88,50 @@ class _CropSampleState extends ConsumerState<CropSample> {
                 const SizedBox(
                   height: 20.0,
                 ),
-               ref.watch(cropImgProvider).isCroped == false? Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: GestureDetector(
-                    onTap: () async {
-                      var value = await imageSelectSheet(context);
+                ref.watch(cropImgProvider).isCroped == false
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: GestureDetector(
+                          onTap: () async {
+                            var value = await imageSelectSheet(context);
 
-                      if (value != null) {
-                        ref
-                            .read(cropImgProvider)
-                            .galleryImages(isCamera: value);
-                      }
-                      // }
-                    },
-                    child: DottedBorder(
-                      radius: const Radius.circular(8.0),
-                      color: blueColor,
-                      borderType: BorderType.RRect,
-                      strokeWidth: 1,
-                      child: Container(
-                        color: const Color.fromARGB(255, 223, 240, 255),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 14.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.image,
-                                  color: blueColor,
-                                ),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
-                                MyText(text: 'Change picture here and adjust')
-                              ]),
+                            if (value != null) {
+                              ref
+                                  .read(cropImgProvider)
+                                  .galleryImages(isCamera: value);
+                            }
+                            // }
+                          },
+                          child: DottedBorder(
+                            radius: const Radius.circular(8.0),
+                            color: blueColor,
+                            borderType: BorderType.RRect,
+                            strokeWidth: 1,
+                            child: Container(
+                              color: const Color.fromARGB(255, 223, 240, 255),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 14.0),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.image,
+                                        color: blueColor,
+                                      ),
+                                      const SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      MyText(
+                                          text:
+                                              'Change picture here and adjust')
+                                    ]),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ):SizedBox.shrink(),
+                      )
+                    : const SizedBox.shrink(),
                 Expanded(
                   child: ref.watch(cropImgProvider).isCroped == false
                       ? (ref.watch(cropImgProvider).imageData != null
@@ -196,17 +181,21 @@ class _CropSampleState extends ConsumerState<CropSample> {
                 const SizedBox(
                   height: 20.0,
                 ),
-              ref.watch(cropImgProvider).isCroped==false?  PrimaryButton(
-                  height: 50.0,
-                  cornerRadius: 25.0,
-                  color: redColor,
-                  onPressed: () {
-                    progressDialog(context, text: "Uploading");
+                ref.watch(cropImgProvider).isCroped == false
+                    ? PrimaryButton(
+                        height: 50.0,
+                        cornerRadius: 25.0,
+                        color: redColor,
+                        onPressed: () {
+                          progressDialog(context, text: "Uploading");
 
-                    _cropController.crop();
-                  },
-                  btnText: 'Save ',
-                ):SizedBox(height: 120.0,),
+                          _cropController.crop();
+                        },
+                        btnText: 'Save ',
+                      )
+                    : const SizedBox(
+                        height: 120.0,
+                      ),
                 const SizedBox(height: 16),
               ],
             ),

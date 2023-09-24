@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
 import 'package:edlerd_project/provider/upload_image_provider.dart';
-import 'package:edlerd_project/screens/upload_picture/ui/card_view.dart';
+import 'package:edlerd_project/screens/upload_picture/ui/card_view_screen.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
 import 'package:edlerd_project/widget/my_text.dart';
 import 'package:edlerd_project/widget/primary_button.dart';
@@ -67,7 +67,6 @@ class UploadPicure extends StatelessWidget {
                     cornerRadius: 25.0,
                     color: redColor,
                     onPressed: () async {
-                    
                       progressDialog(context, text: "Uploading");
                       var status = await ref
                           .read(uploadImageProvider)
@@ -76,7 +75,8 @@ class UploadPicure extends StatelessWidget {
                       Navigator.pop(context);
                       if (status == true) {
                         // ignore: use_build_context_synchronously
-                        navigatorPushReplaceUntil(context, const CardView());
+                        navigatorPushReplaceUntil(
+                            context, const CardViewScreen());
                       }
                     },
                     btnText: 'Save & Continue',

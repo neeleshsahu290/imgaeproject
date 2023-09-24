@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:edlerd_project/helper/navigator_help.dart';
-import 'package:edlerd_project/screens/upload_picture/ui/crop_img.dart';
-import 'package:edlerd_project/screens/upload_picture/ui/widgets/dumy_card_data.dart';
+import 'package:edlerd_project/screens/upload_picture/ui/crop_img_screen.dart';
+import 'package:edlerd_project/screens/upload_picture/widgets/dumy_card_data.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
 import 'package:edlerd_project/widget/custom_image_view.dart';
 import 'package:edlerd_project/widget/my_text.dart';
@@ -68,7 +68,7 @@ class _EditCardState extends State<EditCard> {
                       onPressed: () async {
                         var value = await navigatorPush(
                             context,
-                            CropSample(
+                            CropImageScreen(
                               imgUrl: widget.imgUrl,
                             ));
                         if (value != null) {

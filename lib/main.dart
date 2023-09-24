@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/screens/home/ui/home_screen.dart';
-import 'package:edlerd_project/screens/upload_picture/ui/crop_img.dart';
-import 'package:edlerd_project/util/common_utils.dart';
+import 'package:edlerd_project/screens/upload_picture/ui/crop_img_screen.dart';
+import 'package:edlerd_project/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,28 +19,16 @@ Future<void> main() async {
 
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  //message notification
-  // FirebaseMessaging.onBackgroundMessage(messageHandler);
-
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // await GetStorage.init(localStorageContainer);
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // await setupServiceLocator();
   runApp(
     const ProviderScope(
       child: MyApp(),
     ),
   );
-  // Future.delayed(const Duration(seconds: 1)).then(
-  //   (value) => FlutterNativeSplash.remove(),
-  // );
 }
 
 final GlobalKey<ScaffoldMessengerState> snackbarKey =
@@ -59,7 +47,7 @@ class _MyAppState extends State<MyApp> {
     return ResponsiveSizer(
       builder: ((context, orientation, screenType) => MaterialApp(
             navigatorKey: NavigationService.navigatorKey,
-            title: 'Better You',
+            title: 'Image Uploader',
             scaffoldMessengerKey: snackbarKey,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -70,11 +58,6 @@ class _MyAppState extends State<MyApp> {
                 primaryColor: colorPrimary,
                 progressIndicatorTheme:
                     const ProgressIndicatorThemeData(color: redColor),
-                // pageTransitionsTheme: const PageTransitionsTheme(
-                //   builders: {
-                //     TargetPlatform.android: CustomTransitionBuilder(),
-                //   },
-                // ),
                 appBarTheme: const AppBarTheme(
                   iconTheme: IconThemeData(color: Colors.black),
                   color: Colors.deepPurpleAccent,
@@ -86,9 +69,6 @@ class _MyAppState extends State<MyApp> {
                   ),
                 )),
             home: const HomeScreen(),
-            // home: SessionManager.getBool(isLoggedIn)
-            //     ? const DashbordLoadingScreen()
-            //     : const IntroScreen(),
           )),
     );
   }

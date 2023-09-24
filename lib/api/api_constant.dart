@@ -4,10 +4,10 @@ class ApiConstant {
   // Base in url
   static const String apiBaseUrl = "https://dev.elred.io/";
 
-  // get Sub Category
+  // get Image Data
   static const String getImageData = "selectedCardDesignDetails";
 
   
-  // get Sub Category
+  // upload Image 
   static const String uploadImageData = "postProfileBannerImage";
 }
