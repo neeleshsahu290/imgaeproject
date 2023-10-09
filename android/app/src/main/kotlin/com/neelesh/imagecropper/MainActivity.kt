@@ -1,4 +1,4 @@
-package com.example.edlerd_project
+package com.neelesh.imagecropper
 
 import io.flutter.embedding.android.FlutterActivity
 

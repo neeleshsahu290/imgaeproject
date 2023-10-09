@@ -1,13 +1,10 @@
-// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages, library_private_types_in_public_api
-
-import 'dart:developer';
-import 'dart:io';
-import 'dart:typed_data';
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/provider/crop_image_provider.dart';
 import 'package:edlerd_project/screens/home/widget/image_select_sheet.dart';
+import 'package:edlerd_project/util/utils.dart';
 import 'package:edlerd_project/widget/custom_app_bar.dart';
 import 'package:edlerd_project/widget/custom_image_view.dart';
 import 'package:edlerd_project/widget/custom_progress_indiactor.dart';
@@ -18,7 +15,6 @@ import 'package:flutter/material.dart';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 
 final cropImgProvider =
     ChangeNotifierProvider.autoDispose<CropImageProvider>((ref) {
@@ -65,7 +61,6 @@ class _CropImageState extends ConsumerState<CropImageScreen> {
               child: IconButton(
                 onPressed: () {
                   var url = ref.read(cropImgProvider).imgUrl;
-                  log(url.toString());
 
                   Navigator.pop(context, url);
                 },
@@ -93,14 +88,13 @@ class _CropImageState extends ConsumerState<CropImageScreen> {
                         padding: const EdgeInsets.all(16.0),
                         child: GestureDetector(
                           onTap: () async {
-                            var value = await imageSelectSheet(context);
+                            var value = await imageSelectBottomSheet(context);
 
                             if (value != null) {
                               ref
                                   .read(cropImgProvider)
                                   .galleryImages(isCamera: value);
                             }
-                            // }
                           },
                           child: DottedBorder(
                             radius: const Radius.circular(8.0),
@@ -175,7 +169,7 @@ class _CropImageState extends ConsumerState<CropImageScreen> {
                               height: double.infinity,
                               width: double.infinity,
                               url: ref.watch(cropImgProvider).imgUrl ?? "",
-                              fallBackText: "fallBackText"),
+                              fallBackText:ref.watch(cropImgProvider).imgUrl ?? ""),
                         ),
                 ),
                 const SizedBox(
@@ -203,17 +197,5 @@ class _CropImageState extends ConsumerState<CropImageScreen> {
         ),
       ),
     );
-  }
-}
-
-saveUint8ListAsImageFile(Uint8List uint8List) async {
-  try {
-    final tempdir = await getTemporaryDirectory();
-
-    final File imageFile = File('${tempdir.path}/image2.jpg');
-    await imageFile.writeAsBytes(uint8List);
-    return imageFile;
-  } catch (e) {
-    return null;
   }
 }

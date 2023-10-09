@@ -63,7 +63,7 @@ class _EditCardState extends ConsumerState<CardViewScreen> {
                               cornerRadius: 20.0,
                               height: 75.h,
                               url: imgUrl,
-                              fallBackText: "fallBackText"),
+                              fallBackText: imgUrl),
                         ),
                         const DummyDate()
                       ],

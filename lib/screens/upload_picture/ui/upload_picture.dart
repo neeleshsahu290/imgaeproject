@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:edlerd_project/constants/app_color.dart';
 import 'package:edlerd_project/helper/navigator_help.dart';
@@ -71,10 +73,8 @@ class UploadPicure extends StatelessWidget {
                       var status = await ref
                           .read(uploadImageProvider)
                           .uploadImageData(file: file);
-                      // ignore: use_build_context_synchronously
                       Navigator.pop(context);
                       if (status == true) {
-                        // ignore: use_build_context_synchronously
                         navigatorPushReplaceUntil(
                             context, const CardViewScreen());
                       }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:edlerd_project/helper/navigator_help.dart';
 import 'package:edlerd_project/screens/upload_picture/ui/crop_img_screen.dart';
 import 'package:edlerd_project/screens/upload_picture/widgets/dumy_card_data.dart';
@@ -8,23 +6,30 @@ import 'package:edlerd_project/widget/custom_image_view.dart';
 import 'package:edlerd_project/widget/my_text.dart';
 import 'package:edlerd_project/widget/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/app_color.dart';
 
+final imageProvider = StateProvider.autoDispose<String>((ref) {
+  return "";
+});
+
 // ignore: must_be_immutable
-class EditCard extends StatefulWidget {
+class EditCard extends ConsumerStatefulWidget {
   String imgUrl;
   EditCard({super.key, required this.imgUrl});
 
   @override
-  State<EditCard> createState() => _EditCardState();
+  ConsumerState<EditCard> createState() => _EditCardState();
 }
 
-class _EditCardState extends State<EditCard> {
-  late String imgUrl;
+class _EditCardState extends ConsumerState<EditCard> {
   @override
   void initState() {
-    imgUrl = widget.imgUrl;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(imageProvider.notifier).state = widget.imgUrl;
+    });
+
     super.initState();
   }
 
@@ -32,7 +37,7 @@ class _EditCardState extends State<EditCard> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.pop(context, imgUrl);
+        Navigator.pop(context, ref.read(imageProvider));
         return Future.value(true);
       },
       child: Scaffold(
@@ -40,7 +45,7 @@ class _EditCardState extends State<EditCard> {
           isTitleCenter: false,
           title: "Custom Image Card",
           onBackPressed: () {
-            Navigator.pop(context, imgUrl);
+            Navigator.pop(context, ref.read(imageProvider));
           },
         ),
         body: SingleChildScrollView(
@@ -52,12 +57,14 @@ class _EditCardState extends State<EditCard> {
                 children: [
                   Stack(
                     children: [
-                      CustomImageView(
-                          width: double.infinity,
-                          cornerRadius: 20.0,
-                          height: 75.h,
-                          url: imgUrl,
-                          fallBackText: "fallBackText"),
+                      Consumer(
+                        builder: (context, ref, child) => CustomImageView(
+                            width: double.infinity,
+                            cornerRadius: 20.0,
+                            height: 75.h,
+                            url: ref.watch(imageProvider),
+                            fallBackText: ref.watch(imageProvider).toString()),
+                      ),
                       const DummyDate()
                     ],
                   ),
@@ -72,9 +79,7 @@ class _EditCardState extends State<EditCard> {
                               imgUrl: widget.imgUrl,
                             ));
                         if (value != null) {
-                          imgUrl = value;
-                          log("second");
-                          setState(() {});
+                          ref.read(imageProvider.notifier).state = value;
                         }
                       },
                       disablePadding: true,
@@ -105,7 +110,7 @@ class _EditCardState extends State<EditCard> {
               cornerRadius: 25.0,
               color: colorPrimary,
               onPressed: () {
-                Navigator.pop(context, imgUrl);
+                Navigator.pop(context, ref.read(imageProvider));
 
                 // navigatorPush(context, EditCard());
               },
